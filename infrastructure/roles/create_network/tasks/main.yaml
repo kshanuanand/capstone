@@ -1,0 +1,15 @@
+---
+- name: create cloudformation stack network
+  cloudformation:
+    stack_name: "{{ stack_name }}"
+    state: present
+    region: "{{ aws_region }}"
+    disable_rollback: false
+    template: network.yaml
+    template_parameters:
+      EnvName: "{{ envName }}"
+      vpcCidr: "{{ vpcCidr }}"
+      pubSubnet1: "{{ pubSub1 }}"
+      pubSubnet2: "{{ pubSub2 }}"
+      privSubnet1: "{{ privSub1 }}"
+      privSubnet2: "{{ privSub2 }}"

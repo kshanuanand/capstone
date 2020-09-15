@@ -1,0 +1,66 @@
+Description: >
+  Network cloudformation for dummy environment to test deployment
+
+Parameters:
+  EnvName:
+    Type: String
+    Description: Name of the environment
+
+  vpcCidr:
+    Type: String
+    Description: VPC CIDR for the deployment environment
+    Default: 10.0.0.0/16
+
+  pubSubnet1:
+    Type: String
+    Description: Public Subnet 1 for the Availability Zone 1
+    Default: 10.0.0.0/24
+
+  pubSubnet2:
+    Type: String
+    Description: Public Subnet 2 for the Availability Zone 2
+    Default: 10.0.1.0/24
+
+  privSubnet1:
+    Type: String
+    Description: Private Subnet 1 for the Availability Zone 1
+    Default: 10.0.2.0/24
+
+  privSubnet2:
+    Type: String
+    Description: Private Subnet 2 for the Availability Zone 2
+
+Resources:
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref vpcCidr
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Ref EnvName
+
+  IGW:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvName} InternetGateway
+
+  IGWAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref IGW
+      VpcId: !Ref VPC
+
+  PubSub1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: !Select [0, !GetAzs '']
+      CidrBlock: !Ref pubSubnet1
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvName} Public Subnet (AZ1)
