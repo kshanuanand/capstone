@@ -64,3 +64,14 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub ${EnvName} Public Subnet (AZ1)
+
+  PubSub2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      Availabilityone: !Select [0, !GetAzs '']
+      CidrBlock: !Ref pubSubnet2
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvName} Public Subnet (AZ2)
