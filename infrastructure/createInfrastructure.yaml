@@ -1,5 +1,5 @@
 ---
 - name: Create infrastructure for deployment
-  host: localhost
+  hosts: all
   role:
     - create_network
