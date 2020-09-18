@@ -11,5 +11,6 @@ privSubnet1: "${privSubnet1}"
 privSubnet2: "${privSubnet2}"
 EOF
 
-cd ../infrastructure/
+cd infrastructure/
 ansible-playbook createInfrastructure.yaml 
+cd -
