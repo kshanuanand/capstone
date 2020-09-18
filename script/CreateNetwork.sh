@@ -11,6 +11,9 @@ privSubnet1: "${privSubnet1}"
 privSubnet2: "${privSubnet2}"
 EOF
 
+echo "Printing group_vars"
+cat infrastructure/group_vars/all/main
+
 cd infrastructure/
 ansible-playbook createInfrastructure.yaml -i localhost, --connection=local
 cd -
