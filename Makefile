@@ -1,5 +1,5 @@
 setup:
-	python -m venv ~/.devops
+	python3 -m venv ~/.devops
 	source ~/.devops/bin/activate
 	echo 'R3QxNXRvMTlHdWl0YXIkCg==' | base64 --decode | docker login -u kshanuanand --password-stdin
 
