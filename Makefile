@@ -11,7 +11,7 @@ install:
 	#	yum install -y ./tidy-5.4.0-64bit.rpm
 
 lint:
-	hadolint ignore=DL3013 Dockerfile
+	hadolint --ignore DL3013 Dockerfile
 	pylint --disable=R,C,W1203 app.py
 	tidy templates/*.html
 
