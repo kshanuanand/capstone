@@ -17,7 +17,7 @@ pipeline{
                 } 
             }
             steps{
-                sh ". ./pipelines/CreateNetwork.sh"
+                sh ". ./script/CreateNetwork.sh"
             }
 
         }
