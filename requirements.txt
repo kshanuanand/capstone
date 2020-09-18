@@ -1,6 +1,2 @@
 flask==1.1.2
 kubernetes==11.0.0
-pytest==6.0.2
-pylint==2.6.0
-html-linter==0.4.0
-jinjaninja==0.1.2
