@@ -9,8 +9,10 @@ pipeline{
       make lint
     }
     stage('Build and deploy Image'){
-      docker build -t kshanuanand/capstone:${BUILD_NUMBER}
-      docker push
+      steps{
+        docker build -t kshanuanand/capstone:${BUILD_NUMBER} .
+        docker push
+      }
     }
     stage('Create Infrastructure'){
     }
