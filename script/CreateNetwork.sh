@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 python3 -m venv .devops
-. ./devops/bin/activate
+. ./.devops/bin/activate
 pip install boto
 
 cat > infrastructure/group_vars/all/main <<EOF
