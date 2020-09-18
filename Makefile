@@ -7,9 +7,9 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 	#wget -O hadolint "https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64" &&\
-		chmod +x hadolint
+	#	chmod +x hadolint
 	#wget https://github.com/htacg/tidy-html5/releases/download/5.4.0/tidy-5.4.0-64bit.rpm &&\
-		yum install -y ./tidy-5.4.0-64bit.rpm
+	#	yum install -y ./tidy-5.4.0-64bit.rpm
 
 lint:
 	hadolint Dockerfile
