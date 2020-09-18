@@ -10,7 +10,7 @@ pipeline{
     }
     stage('Build and deploy Image'){
       steps{
-        docker build -t kshanuanand/capstone:${BUILD_NUMBER} .
+        docker build -t "kshanuanand/capstone:${BUILD_NUMBER}" .
         docker push
       }
     }
