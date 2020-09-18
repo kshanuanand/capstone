@@ -5,7 +5,7 @@
     state: present
     region: "{{ aws_region }}"
     disable_rollback: false
-    template: cloudformation/network.yaml
+    template: roles/create_network/cloudformation/network.yaml
     template_parameters:
       EnvName: "{{ EnvName }}"
       vpcCidr: "{{ vpcCidr }}"
