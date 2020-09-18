@@ -1,9 +1,16 @@
 pipeline{
   agent any
   stages{
+    stage('Setup Workspace'){
+      make setup
+      make install
+    }
     stage('Linting'){
+      make lint
     }
     stage('Build and deploy Image'){
+      docker build -t kshanuanand/capstone:${BUILD_NUMBER}
+      docker push
     }
     stage('Create Infrastructure'){
     }
