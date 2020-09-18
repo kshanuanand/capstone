@@ -4,12 +4,18 @@ pipeline{
     stage('Setup Workspace'){
       steps{
         sh "make setup"
-        sh "make install"
+        sh '''
+        . .devops/bin/activate
+        make install
+        '''
       }
     }
     stage('Linting'){
       steps{
-        sh "make lint"
+        sh '''
+        . .devops/bin/activate
+        make lint
+        '''
       }
     }
     stage('Build and deploy Image'){
