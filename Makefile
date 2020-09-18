@@ -13,7 +13,7 @@ install:
 lint:
 	hadolint --ignore DL3013 Dockerfile
 	pylint --disable=R,C,W1203 app.py
-	jinja-ninja templates/aboutme.html
-	tidy templates/index.html
+	jinja-ninja templates/index.html
+	tidy templates/aboutme.html
 
 all: install lint
