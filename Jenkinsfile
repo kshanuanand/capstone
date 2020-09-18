@@ -19,16 +19,25 @@ pipeline{
       }
     }
     stage('Create Infrastructure'){
-      sh "echo 'Create Infrastructure'"
+      steps{
+        sh "echo 'Create Infrastructure'"
+      }
     }
     stage('Deploy application'){
-      sh "echo 'Deploy application'"
+      steps{
+        sh "echo 'Deploy application'"
+      }
+      
     }
     stage('Test Application'){
-      sh "echo 'Test Application'"
+      steps{
+        sh "echo 'Test Application'"
+      }
     }
     stage('Rolling upgrade to Production'){
-      sh "echo 'Rolling'"
+      steps{
+        sh "echo 'Rolling'"
+      }
     }
   }
 }
