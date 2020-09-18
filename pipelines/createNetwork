@@ -13,7 +13,7 @@ pipeline{
         stage('Create Network'){
             when { "${params.EnvName}" != ''}
             steps{
-                sh '. ./pipelines/CreateNetwork.sh"
+                sh ". ./pipelines/CreateNetwork.sh"
             }
 
         }
