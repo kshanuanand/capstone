@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-cat > ../group_vars/all/main <<EOF
+cat > infrastructure/group_vars/all/main <<EOF
 aws_region: "${aws_region}"
 stack_name: "${EnvName}-network-stack"
 EnvName: "${EnvName}"
