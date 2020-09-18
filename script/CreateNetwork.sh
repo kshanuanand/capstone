@@ -2,7 +2,7 @@
 
 python3 -m venv .devops
 . ./.devops/bin/activate
-pip install boto
+pip install boto boto3
 
 cat > infrastructure/group_vars/all/main <<EOF
 aws_region: "${aws_region}"
