@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+python3 -m venv .devops
+. ./devops/bin/activate
+pip install boto
+
 cat > infrastructure/group_vars/all/main <<EOF
 aws_region: "${aws_region}"
 stack_name: "${EnvName}-network-stack"
