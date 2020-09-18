@@ -12,5 +12,5 @@ privSubnet2: "${privSubnet2}"
 EOF
 
 cd infrastructure/
-ansible-playbook createInfrastructure.yaml 
+ansible-playbook createInfrastructure.yaml -i localhost, --connection=local
 cd -
