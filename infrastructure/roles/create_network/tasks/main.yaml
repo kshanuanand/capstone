@@ -9,7 +9,7 @@
     template_parameters:
       EnvName: "{{ envName }}"
       vpcCidr: "{{ vpcCidr }}"
-      pubSubnet1: "{{ pubSub1 }}"
-      pubSubnet2: "{{ pubSub2 }}"
-      privSubnet1: "{{ privSub1 }}"
-      privSubnet2: "{{ privSub2 }}"
+      pubSubnet1: "{{ pubSubnet1 }}"
+      pubSubnet2: "{{ pubSubnet2 }}"
+      privSubnet1: "{{ privSubnet1 }}"
+      privSubnet2: "{{ privSubnet2 }}"
