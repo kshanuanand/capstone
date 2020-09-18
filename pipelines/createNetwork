@@ -1,0 +1,21 @@
+pipeline{
+    agent any
+    parameters{
+        string(name: 'EnvName', defaulValue: '', description: 'Name of the stack')
+        string(name: 'aws_region', defaulValue: 'us-west-2', description: 'AWS Regions where you want to create a network')
+        string(name: 'vpcCidr', defaulValue: '10.0.0.0/16', description: 'Cidr block for VPC')
+        string(name: 'pubSubnet1', defaulValue: '10.0.0.0/24', description: 'Cidr block for Public Subnet 1')
+        string(name: 'pubSubnet2', defaulValue: '10.0.1.0/24', description: 'Cidr block for Public Subnet 2')
+        string(name: 'privSubnet1', defaulValue: '10.0.2.0/24', description: 'Cidr block for Private Subnet 1 ')
+        string(name: 'privSubnet2', defaulValue: '10.0.3.0/24', description: 'Cidr block for provate Subnet2')
+    }
+    stages{
+        stage('Create Network'){
+            when { "${params.EnvName}" != ''}
+            steps{
+                sh '. ./pipelines/CreateNetwork.sh"
+            }
+
+        }
+    }
+}
