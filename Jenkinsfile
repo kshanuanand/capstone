@@ -2,11 +2,15 @@ pipeline{
   agent any
   stages{
     stage('Setup Workspace'){
-      make setup
-      make install
+      steps{
+        make setup
+        make install
+      }
     }
     stage('Linting'){
-      make lint
+      steps{
+        make lint
+      }
     }
     stage('Build and deploy Image'){
       steps{
