@@ -7,7 +7,7 @@
     disable_rollback: false
     template: network.yaml
     template_parameters:
-      EnvName: "{{ envName }}"
+      EnvName: "{{ EnvName }}"
       vpcCidr: "{{ vpcCidr }}"
       pubSubnet1: "{{ pubSubnet1 }}"
       pubSubnet2: "{{ pubSubnet2 }}"
