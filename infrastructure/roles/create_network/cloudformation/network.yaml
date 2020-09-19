@@ -94,13 +94,13 @@ Resources:
   PubSub1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      RouteTableId: !Ref PublicRouteTable
+      RouteTableId: !Ref PubRouteTable
       SubnetId: !Ref PubSub1
 
   PubSub2RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      RouteTableId: !Ref PublicRouteTable
+      RouteTableId: !Ref PubRouteTable
       SubnetId: !Ref PubSub2
 
 Outputs:
