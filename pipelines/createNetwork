@@ -17,7 +17,9 @@ pipeline{
                 } 
             }
             steps{
-                sh ". ./script/CreateNetwork.sh"
+                withAWS(region:"${params.aws_region}",credentials:'udacity-aws-cli-user'){
+                    sh ". ./script/CreateNetwork.sh"
+                }
             }
 
         }
