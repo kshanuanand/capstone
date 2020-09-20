@@ -1,0 +1,103 @@
+Description: >
+  Cloudformation to create an EC2 instance. It will install docker and rke binary along with.
+
+Parameters:
+  EnvName:
+    Type: String
+    Description: Name of the EC2 created
+
+  VPCEnvName:
+    Type: String
+    Description: Stack Name of VPC Network
+
+  EC2AmiId:
+    Type: String
+    Description: AMI Id for Ec2 Instance
+
+  EC2Key:
+    Type: String
+    Description: Name of the Key to be used to login into EC2 instance
+  
+  EC2Instance:
+    Type: String
+    Description: EC2 instance type t obe used
+    Default: t2.micro
+
+Resources:
+
+  EC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Aloow http and ssh to host
+      VpcId:
+        Fn::importValue:
+          !Sub "${VPCEnvName}-VPCID"
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 30000
+        ToPort: 30100
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: tcp
+        FromPort: 0
+        ToPort: 65535
+        CidrIp: 0.0.0.0/0
+
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref EC2AmiId
+      KeyName: !Ref EC2Key
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          SubnetId:
+            Fn::ImportValue:
+              !Sub "${VPCEnvName}-PUB1-SubNet"
+      UserData:
+        Fn:Base64: !Sub |
+          #!/usr/bin/bash
+          # Install docker
+          apt-get update
+          apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          add-apt-repository \
+          "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+          $(lsb_release -cs) \
+          stable"
+          apt-get update
+          apt-get install -y docker-ce
+          usermod -aG docker ubuntu
+          wget -O /usr/bin/rke https://github.com/rancher/rke/releases/download/v1.1.5/rke_linux-arm64 &&\
+            chmod +x /usr/bin/rke
+          wget -O /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/v1.15.1/bin/linux/amd64/kubectl" &&\
+            chmod +x /usr/bin/kubectl
+          myhost=$(hostname)
+          cat /root/cluster.yaml <<EOF
+          nodes:
+            - adress: ${myhost}
+              user: ubuntu
+              role:
+                - controlplane
+                - etcd
+                - worker
+          EOF
+          cd /root/
+          rke up
+      SecurityGroups: !Ref EC2SecurityGroup
+      InstanceType: !Ref EC2Instance
+      BlockDeviceMappings:
+      - DeviceName: "/dev/sdk"
+        Ebs:
+          VolumeSize: '10'
+
+Outputs:
+  Ec2IP:
+    Description:
+    Value: !GetAtt MyEC2.PublicDnsName
+    Export:
+      Name: !Sub ${EnvName}-EC2

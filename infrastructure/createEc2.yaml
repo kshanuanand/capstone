@@ -1,0 +1,5 @@
+---
+- name: Create EC2 instance for deployment
+  hosts: all
+  roles:
+    - create_ec2

@@ -13,3 +13,11 @@
       pubSubnet2: "{{ pubSubnet2 }}"
       privSubnet1: "{{ privSubnet1 }}"
       privSubnet2: "{{ privSubnet2 }}"
+
+- name: set cloudformation facts
+  cloudformation_info:
+    stack_name: "{{ stack_name }}"
+  register: my_stack
+
+- debug:
+    msg: "{{ my_stack.cloudformation[stack_name].stack_outputs }}"

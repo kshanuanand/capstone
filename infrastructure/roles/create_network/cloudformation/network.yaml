@@ -110,4 +110,20 @@ Outputs:
     Export:
       Name: !Sub ${EnvName}-VPCID
 
-  
+  PublicSubnets:
+    Description: List of public SUbnets
+    Value: !Join [ ",", [ !Ref PubSub1, !Ref PubSub2 ] ]
+    Export:
+      Name: !Sub ${EnvName}-PUB-NETS
+
+  PublicSubnet1:
+    Description: Public Subnet 1
+    Value: !Ref PubSub1
+    Export:
+      Name: !Sub ${EnvName}-PUB1-SubNet
+
+  PublicSubnet2:
+    Description: Public Subnet 2
+    Value: !Ref PubSub2
+    Export:
+      Name: !Sub ${EnvName}-PUB2-Subnet

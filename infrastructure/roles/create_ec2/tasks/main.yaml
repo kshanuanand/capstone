@@ -1,0 +1,24 @@
+---
+- name: Clouformation to create EC2 instance and set up k8s
+  cloudformation:
+    stack_name: "{{ stack_name }}"
+    state: "{{ state }}"
+    region: "{{ aws_region }}"
+    disable_rollback: false
+    template: roles/create_ec2/cloudformation/ec2.yaml
+    template_parameters:
+      EnvName: "{{ EnvName }}"
+      VPCEnvName: "{{ vpc_EnvName }}"
+      EC2AmiId: "{{ EC2AmiId }}"
+      EC2Key: "{{ EC2Key }}"
+      EC2Instance: "{{ EC2Instance }}"
+
+- name: set cloudformation facts
+  cloudformation_info"
+    stakc_name: "{{ stack_name }}"
+  register: my_stack_ec2
+  when: "{{ state }}" == 'present'
+
+- debug:
+    msg: "{{ my_stack_ec2.cloudformation[stack_name].stack_outputs }}"
+    when: "{{ state }}" == 'present'
