@@ -76,10 +76,9 @@ Resources:
             chmod +x /usr/bin/rke
           wget -O /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/v1.15.1/bin/linux/amd64/kubectl" &&\
             chmod +x /usr/bin/kubectl
-          myhost=$(hostname)
           cat /root/cluster.yaml <<EOF
           nodes:
-            - adress: ${myhost}
+            - adress: ${HOSTNAME}
               user: ubuntu
               role:
                 - controlplane
