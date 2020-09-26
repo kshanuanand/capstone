@@ -14,10 +14,12 @@
       privSubnet1: "{{ privSubnet1 }}"
       privSubnet2: "{{ privSubnet2 }}"
 
+- set_fact:
+    stack_name1: "{{ stakc_name }}"
 - name: set cloudformation facts
   cloudformation_facts:
     stack_name: "{{ stack_name }}"
   register: my_stack
 
 - debug:
-    msg: "{{ my_stack.cloudformation[stack_name].stack_outputs }}"
+    msg: "{{ my_stack.ansible_facts.cloudformation[stack_name1].stack_outputs }}"
