@@ -10,7 +10,7 @@ state: "${state}"
 aws_region: "${aws_region}"
 EnvName: "${EnvName}"
 vpc_EnvName: "${vpc_EnvName}"
-EC2AmiId: "${EC2AmiId}}"
+EC2AmiId: "${EC2AmiId}"
 EC2Key: "${EC2Key}"
 EC2Instance: "${EC2Instance}"
 EOF
