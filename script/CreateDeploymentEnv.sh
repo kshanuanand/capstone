@@ -5,11 +5,11 @@ python3 -m venv .devops
 pip install boto boto3
 
 cat > infrastructure/group_vars/all/main <<EOF
+stack_name: "${EnvName}-${EnvType}-K8s-stack"
+state: "${state}"
 aws_region: "${aws_region}"
 EnvName: "${EnvName}"
-stack_name: "${EnvName}-${EnvType}-K8s-stack"
 vpc_EnvName: "${vpc_EnvName}"
-state: "${state}"
 EC2AmiId: "{{ EC2AmiId }}"
 EC2Key: "{{ EC2Key }}"
 EC2Instance: "{{ EC2Instance }}"
