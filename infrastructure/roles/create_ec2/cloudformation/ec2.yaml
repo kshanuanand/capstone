@@ -77,14 +77,14 @@ Resources:
           wget -O /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/v1.15.1/bin/linux/amd64/kubectl" &&\
             chmod +x /usr/bin/kubectl
           cat > /root/cluster.yaml <<EOF
-nodes:
-  - adress: ${HOSTNAME}
-    user: ubuntu
-    role:
-      - controlplane
-      - etcd
-      - worker
-EOF
+          nodes:
+            - adress: ${HOSTNAME}
+              user: ubuntu
+              role:
+                - controlplane
+                - etcd
+                - worker
+          EOF
           cd /root/
           rke up
       SecurityGroups: !Ref EC2SecurityGroup
