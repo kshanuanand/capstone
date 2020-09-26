@@ -45,7 +45,8 @@
     state: directory
 
 - name: Copy kubeconfig in ubuntu user
-  src: /etc/kubernetes/admin.conf
-  dest: /home/ubuntu/.kube/config
-  owner: ubuntu
-  group: ubuntu
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/ubuntu/.kube/config
+    owner: ubuntu
+    group: ubuntu
