@@ -20,3 +20,4 @@
 - name: Include post installation steps
   when: state == "present"
   include: k8s.yaml
+  become: yes
