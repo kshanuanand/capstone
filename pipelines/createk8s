@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    parameters{
+        string(name:'stack_name', defaultValue:'blue-k8s', description:'Name of the stack')
+        string(name:'', defaultValue:'', description:'')
+        string(name:'', defaultValue:'', description:'')
+        string(name:'', defaultValue:'', description:'')
+        string(name:'', defaultValue:'', description:'')
+        string(name:'', defaultValue:'', description:'')
+
+    }
+    stages{
+        stage('Create k8s infrastructure'){
+
+        }
+    }
+
+}

@@ -15,7 +15,7 @@
       privSubnet2: "{{ privSubnet2 }}"
 
 - name: set cloudformation facts
-  cloudformation_info:
+  amazon.aws.cloudformation_info:
     stack_name: "{{ stack_name }}"
   register: my_stack
 
