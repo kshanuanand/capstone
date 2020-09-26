@@ -78,7 +78,7 @@ Resources:
             chmod +x /usr/bin/kubectl
           cat > /root/cluster.yaml <<EOF
           nodes:
-            - adress: ${HOSTNAME}
+            - adress: \${HOSTNAME}
               user: ubuntu
               role:
                 - controlplane
