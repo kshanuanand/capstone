@@ -72,21 +72,15 @@ Resources:
           apt-get update
           apt-get install -y docker-ce
           usermod -aG docker ubuntu
-          wget -O /usr/bin/rke https://github.com/rancher/rke/releases/download/v1.1.5/rke_linux-arm64 &&\
-            chmod +x /usr/bin/rke
-          wget -O /usr/bin/kubectl "https://storage.googleapis.com/kubernetes-release/release/v1.15.1/bin/linux/amd64/kubectl" &&\
-            chmod +x /usr/bin/kubectl
-          cat > /root/cluster.yaml <<EOF
-          nodes:
-            - adress: \${HOSTNAME}
-              user: ubuntu
-              role:
-                - controlplane
-                - etcd
-                - worker
+          curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+          cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+          deb https://apt.kubernetes.io/ kubernetes-xenial main
           EOF
+          sudo apt-get update
+          sudo apt-get install -y kubelet kubeadm kubectl
+          sudo apt-mark hold kubelet kubeadm kubectl
           cd /root/
-          rke up
+          kubectl get all --all-namespaces
       SecurityGroups: !Ref EC2SecurityGroup
       InstanceType: !Ref EC2Instance
       BlockDeviceMappings:
