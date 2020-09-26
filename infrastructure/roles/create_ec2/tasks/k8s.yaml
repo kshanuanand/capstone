@@ -1,17 +1,3 @@
-- name: set cloudformation facts
-  cloudformation_facts:
-    stack_name: "{{ stack_name }}"
-  register: my_stack_ec2
-
-- debug:
-    msg: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs }}"
-
-- set_fact:
-    k8s_master: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs['Ec2IPPUB'] }}"
-
-- debug:
-    msg: "{{ k8s_master }}"
-
 - name: Wait for kubeadm to complete and k8s cluster to start
   action: uri url=https://{{ k8s_master }}:6443/livez?verbose validate_certs=False
   register: result
