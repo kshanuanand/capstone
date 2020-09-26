@@ -6,7 +6,7 @@
 - debug:
     msg: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs }}"
 
-- set_facts:
+- set_fact:
     k8s_master: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs['Ec2IP'] }}"
 
 - name: Wait for kubeadm to complete and k8s cluster to start
