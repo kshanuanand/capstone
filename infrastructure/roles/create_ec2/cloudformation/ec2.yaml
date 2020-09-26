@@ -59,7 +59,7 @@ Resources:
             Fn::ImportValue:
               !Sub "${VPCEnvName}-PUB1-SubNet"
       UserData:
-        Fn:Base64: !Sub |
+        Fn::Base64: !Sub |
           #!/usr/bin/bash
           # Install docker
           apt-get update
