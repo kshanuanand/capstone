@@ -30,7 +30,7 @@ Resources:
     Properties:
       GroupDescription: Aloow http and ssh to host
       VpcId:
-        Fn::importValue:
+        Fn::ImportValue:
           !Sub "${VPCEnvName}-VPCID"
       SecurityGroupIngress:
       - IpProtocol: tcp
