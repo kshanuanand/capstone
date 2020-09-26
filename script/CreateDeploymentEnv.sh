@@ -5,6 +5,7 @@ python3 -m venv .devops
 pip install boto boto3
 
 cat > infrastructure/group_vars/all/main <<EOF
+EnvType: "${EnvType}"
 stack_name: "${EnvName}-${EnvType}-K8s-stack"
 state: "${state}"
 aws_region: "${aws_region}"

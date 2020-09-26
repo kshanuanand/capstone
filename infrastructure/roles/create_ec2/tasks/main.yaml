@@ -8,6 +8,7 @@
     template: roles/create_ec2/cloudformation/ec2.yaml
     template_parameters:
       EnvName: "{{ EnvName }}"
+      EnvType: "{{ EnvType }}"
       VPCEnvName: "{{ vpc_EnvName }}"
       EC2AmiId: "{{ EC2AmiId }}"
       EC2Key: "{{ EC2Key }}"

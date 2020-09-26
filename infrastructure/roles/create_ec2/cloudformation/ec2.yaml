@@ -6,6 +6,10 @@ Parameters:
     Type: String
     Description: Name of the EC2 created
 
+  EnvType:
+    Type: String
+    Description: Type of environment
+
   VPCEnvName:
     Type: String
     Description: Stack Name of VPC Network
@@ -100,7 +104,9 @@ Resources:
       - DeviceName: "/dev/sdk"
         Ebs:
           VolumeSize: '10'
-
+      Tags:
+        - Key: Name
+          Value: !Ref ${EnvName}-${EnvType}-K8s
 Outputs:
   Ec2IPPUB:
     Description: Public IP of the EC2 instance created

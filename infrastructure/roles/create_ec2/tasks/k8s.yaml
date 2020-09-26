@@ -7,7 +7,7 @@
     msg: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs }}"
 
 - set_fact:
-    k8s_master: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs['Ec2IPPRIV'] }}"
+    k8s_master: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs['Ec2IPPUB'] }}"
 
 - debug:
     msg: "{{ k8s_master }}"
