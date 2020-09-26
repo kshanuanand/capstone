@@ -1,7 +1,7 @@
 ---
 - name: Create EC2 instance for deployment
   hosts: all
-  env:
+  vars:
     ANSIBLE_HOST_KEY_CHECKING: false
   roles:
     - create_ec2
