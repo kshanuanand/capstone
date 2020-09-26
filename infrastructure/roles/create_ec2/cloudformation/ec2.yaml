@@ -41,6 +41,18 @@ Resources:
         FromPort: 22
         ToPort: 22
         CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 6443
+        ToPort: 6443
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 2379
+        ToPort: 2380
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 10250
+        ToPort: 10252
+        CidrIp: 0.0.0.0/0
       SecurityGroupEgress:
       - IpProtocol: tcp
         FromPort: 0
@@ -90,8 +102,13 @@ Resources:
           VolumeSize: '10'
 
 Outputs:
-  Ec2IP:
-    Description: IP of the EC2 instance created
+  Ec2IP-PUB:
+    Description: Public IP of the EC2 instance created
     Value: !GetAtt MyEC2.PublicDnsName
     Export:
-      Name: !Sub ${EnvName}-EC2
+      Name: !Sub ${EnvName}-PUB-EC2
+  Ec2IP-PRIV:
+    Description: Private IP of the EC2 instance created
+    Value: !GetAtt MyEC2.PrivateDnsName
+    Export:
+      Name: !Sub $P{EnvName}-PRIV-EC2
