@@ -14,11 +14,11 @@
       EC2Instance: "{{ EC2Instance }}"
 
 - name: set cloudformation facts
-  cloudformation_info:
+  cloudformation_facts:
     stakc_name: "{{ stack_name }}"
   register: my_stack_ec2
   when: "{{ state }}" == 'present'
 
 - debug:
-    msg: "{{ my_stack_ec2.cloudformation[stack_name].stack_outputs }}"
+    msg: "{{ {{ my_stack_ec2.ansible_facts.cloudformation[stack_name].stack_outputs }} }}"
     when: "{{ state }}" == 'present'
