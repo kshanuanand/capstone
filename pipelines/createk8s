@@ -5,12 +5,18 @@ pipeline{
         string(name:'state', defaultValue:'present', description:'Value to create or delete the stack')
         string(name:'aws_region', defaultValue:'us-west-2', description:'AWS region where k8s needs to be setup')
         string(name:'EnvName', defaultValue:'capstone', description:'Name of the environment')
-        string(name:'vpc_EnvName', defaultValue:'Name of the VPC', description:'capstone')
-        string(name:'EC2AmiId', defaultValue:'', description:'')
+        string(name:'vpc_EnvName', defaultValue:'capstone', description:'Name of environment for VPC')
+        string(name:'EC2AmiId', defaultValue:'ami-0a634ae95e11c6f91', description:'VM Image ID')
+        string(name:'EC2Key', defaultValue:'aws-cli-test', description:'Key pair to be used to connect to host')
+        string(name:'EC2Instance', defaultValue:'t2.large', description:'size of instance to launch')
 
     }
     stages{
         stage('Create k8s infrastructure'){
+            steps{
+                withAWS(region:"${params.aws_region}",credentials:"udacity-aws-cli-user")
+                sh ". ./script/CreateDeploymentEnv.sh"
+            }
 
         }
     }
