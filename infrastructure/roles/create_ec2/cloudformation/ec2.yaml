@@ -102,12 +102,12 @@ Resources:
           VolumeSize: '10'
 
 Outputs:
-  Ec2IP-PUB:
+  Ec2IPPUB:
     Description: Public IP of the EC2 instance created
     Value: !GetAtt MyEC2.PublicDnsName
     Export:
       Name: !Sub ${EnvName}-PUB-EC2
-  Ec2IP-PRIV:
+  Ec2IPPRIV:
     Description: Private IP of the EC2 instance created
     Value: !GetAtt MyEC2.PrivateDnsName
     Export:
