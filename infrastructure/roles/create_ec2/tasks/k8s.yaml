@@ -1,0 +1,32 @@
+- name: set cloudformation facts
+  cloudformation_facts:
+    stack_name: "{{ stack_name }}"
+  register: my_stack_ec2
+
+- debug:
+    msg: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs }}"
+
+- name: Wait for kubeadm to complete and k8s cluster to start
+  action: uri url=https://localhost:6443/livez?verbose validate_certs=False
+  register: result
+  until: result.msg.find('OK') != -1
+  retries: 18
+  delay: 10
+
+- name: K8s health check result
+  debug:
+    msg: "{{ result.status }} {{ result.msg }}"
+
+- name: Task to create .kube in ubuntu user
+  file:
+    path: /home/ubuntu/.kube
+    owner: ubuntu
+    group: ubuntu
+    state: directory
+
+- name: Copy kubeconfig in ubuntu user
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: /home/ubuntu/.kube/config
+    owner: ubuntu
+    group: ubuntu
