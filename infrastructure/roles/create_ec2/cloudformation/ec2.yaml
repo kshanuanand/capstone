@@ -55,6 +55,8 @@ Resources:
       NetworkInterfaces:
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
+          GroupSet:
+            - Ref: EC2SecurityGroup
           SubnetId:
             Fn::ImportValue:
               !Sub "${VPCEnvName}-PUB1-SubNet"
@@ -81,8 +83,6 @@ Resources:
           sudo apt-mark hold kubelet kubeadm kubectl
           cd /root/
           kubectl get all --all-namespaces
-      SecurityGroups:
-        - !Ref EC2SecurityGroup
       InstanceType: !Ref EC2Instance
       BlockDeviceMappings:
       - DeviceName: "/dev/sdk"
