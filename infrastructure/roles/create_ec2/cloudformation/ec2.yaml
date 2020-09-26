@@ -97,7 +97,7 @@ Resources:
 
 Outputs:
   Ec2IP:
-    Description:
+    Description: IP of the EC2 instance created
     Value: !GetAtt MyEC2.PublicDnsName
     Export:
       Name: !Sub ${EnvName}-EC2
