@@ -106,7 +106,7 @@ Resources:
           VolumeSize: '10'
       Tags:
         - Key: Name
-          Value: !Ref ${EnvName}-${EnvType}-K8s
+          Value: !Sub ${EnvName}-${EnvType}-K8s
 Outputs:
   Ec2IPPUB:
     Description: Public IP of the EC2 instance created
