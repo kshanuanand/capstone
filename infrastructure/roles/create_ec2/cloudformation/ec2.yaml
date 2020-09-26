@@ -62,7 +62,7 @@ Resources:
               !Sub "${VPCEnvName}-PUB1-SubNet"
       UserData:
         Fn::Base64: !Sub |
-          #!/usr/bin/bash
+          #!/bin/bash
           # Install docker
           apt-get update
           apt-get install -y apt-transport-https ca-certificates curl software-properties-common
@@ -82,6 +82,10 @@ Resources:
           sudo apt-get install -y kubelet kubeadm kubectl
           sudo apt-mark hold kubelet kubeadm kubectl
           cd /root/
+          kubeadm init
+          mkdir -p $HOME/.kube
+          sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+          sudo chown $(id -u):$(id -g) $HOME/.kube/config
           kubectl get all --all-namespaces
       InstanceType: !Ref EC2Instance
       BlockDeviceMappings:
