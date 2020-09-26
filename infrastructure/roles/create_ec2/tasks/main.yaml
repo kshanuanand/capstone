@@ -20,8 +20,8 @@
   cloudformation_facts:
     stack_name: "{{ stack_name }}"
   register: my_stack_ec2
-  when: "{{ state }}" == 'present'
+  when: "{{ state }} == 'present'"
 
 - debug:
     msg: "{{ my_stack_ec2.ansible_facts.cloudformation[stack_name1].stack_outputs }}"
-    when: "{{ state }}" == 'present'
+    when: "{{ state }} == 'present'"
