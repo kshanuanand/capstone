@@ -14,7 +14,7 @@
       EC2Instance: "{{ EC2Instance }}"
 
 - name: set cloudformation facts
-  cloudformation_info"
+  cloudformation_info:
     stakc_name: "{{ stack_name }}"
   register: my_stack_ec2
   when: "{{ state }}" == 'present'

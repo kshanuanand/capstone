@@ -2,10 +2,10 @@ pipeline{
     agent any
     parameters{
         string(name:'stack_name', defaultValue:'blue-k8s', description:'Name of the stack')
-        string(name:'', defaultValue:'', description:'')
-        string(name:'', defaultValue:'', description:'')
-        string(name:'', defaultValue:'', description:'')
-        string(name:'', defaultValue:'', description:'')
+        string(name:'state', defaultValue:'present', description:'Value to create or delete the stack')
+        string(name:'aws_region', defaultValue:'us-west-2', description:'AWS region where k8s needs to be setup')
+        string(name:'EnvName', defaultValue:'capstone', description:'Name of the environment')
+        string(name:'vpc_EnvName', defaultValue:'Name of the VPC', description:'capstone')
         string(name:'', defaultValue:'', description:'')
 
     }
