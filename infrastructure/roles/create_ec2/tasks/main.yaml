@@ -15,5 +15,5 @@
       EC2Instance: "{{ EC2Instance }}"
 
 - name: include k8s.yaml
-  when: "{{ state }}" == 'present'
+  when: state == 'present'
   include: k8s.yaml
