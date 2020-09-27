@@ -4,12 +4,11 @@
     dest: /home/ubuntu/mydeployment.yaml
 
 - name: delete deployment of already present
-  k8s_raw:
-    state: absent
-    src: /home/ubuntu/mydeployment.yaml
+  shell: |
+    kubecl delete deployment myapp
+    kubectl delete svc myapp-python-service
 
 - name: install the deployment again
-  k8s_raw:
-    state: present
-    src: /home/ubuntu/mydeployment.yaml
+  shell: |
+    kubectl apply -f /home/ubuntu/mydeployment.yaml
 
