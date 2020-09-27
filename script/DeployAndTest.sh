@@ -15,7 +15,7 @@ pip install boto boto3
 python script/getK8sIP.py "${stack_name}"
 k8shost=''
 
-aws cloudformation describe-stacks --stack-name ${stack_name} | jq
+#aws cloudformation describe-stacks --stack-name ${stack_name} | jq
 cat > infrastructure/group_vars/all/k8shosts.ini <<EOF
 [k8shost]
 "${k8shost}" ansible_user=ubuntu ansible_connection=ssh
