@@ -116,9 +116,9 @@ Outputs:
     Description: Public IP of the EC2 instance created
     Value: !GetAtt MyEC2.PublicDnsName
     Export:
-      Name: !Sub ${EnvName}-PUB-EC2
+      Name: !Sub ${EnvName}-${EnvType}-PUB-EC2
   Ec2IPPRIV:
     Description: Private IP of the EC2 instance created
     Value: !GetAtt MyEC2.PrivateDnsName
     Export:
-      Name: !Sub ${EnvName}-PRIV-EC2
+      Name: !Sub ${EnvName}-${EnvType}-PRIV-EC2

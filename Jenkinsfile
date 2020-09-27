@@ -70,7 +70,9 @@ pipeline{
     stage('Deploy on Green Environment'){
       steps{
         sh "echo 'Deploy application'"
-
+        sh '''
+          . ./script/DeployAndTest.sh "capstone-green-K8s-stack"
+        '''
       }
       
     }
