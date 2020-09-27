@@ -1,4 +1,5 @@
-import boto boto3
+import boto
+import boto3
 import sys
 sName = sys.argv[1]
 cfn = boto3.client('cloudformation')
