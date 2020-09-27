@@ -71,7 +71,7 @@ pipeline{
       steps{
         sh "echo 'Deploy application'"
         sh '''
-          . ./script/DeployAndTest.sh "capstone-green-K8s-stack"
+          bash /script/DeployAndTest.sh "capstone-green-K8s-stack"
         '''
       }
       
