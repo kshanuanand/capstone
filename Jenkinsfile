@@ -92,20 +92,20 @@ pipeline{
   post{
     always{
       echo "Cleaning up docker images"
-      sh """
+      sh '''
         container_list=$(docker ps -a| grep Exited| awk '{print \$1}'|tr '\n' ' ')
         if [ "X$container_list" != "X"]
         then
           docker rm $container_list
         fi
-      """
-      sh """
+      '''
+      sh '''
         image_list=$(docker image ls| awk '{print \$3}'|grep -v IMAGE | tr '\n' | ' ')
         if [ "X$image_list" != "X" ]
         then
           docker rmi
         fi
-      """
+      '''
     }
   }
 }
