@@ -12,7 +12,7 @@ python3 -m venv .devops
 . ./.devops/bin/activate
 pip install boto boto3
 
-python getK8sIP.py "${stack_name}"
+python script/getK8sIP.py "${stack_name}"
 k8shost=''
 
 aws cloudformation describe-stacks --stack-name ${stack_name} | jq
