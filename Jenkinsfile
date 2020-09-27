@@ -89,4 +89,11 @@ pipeline{
       }
     }
   }
+  post{
+    always{
+      echo "Cleaning up docker images"
+      sh "docker ps -a| grep Exited| awk '{print \$1}'| xargs docker rm"
+      sh "docker image ls| awk '{print \$3}'|grep -v IMAGE| xargs docker rmi"
+    }
+  }
 }
