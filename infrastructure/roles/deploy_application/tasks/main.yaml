@@ -5,8 +5,16 @@
 
 - name: delete deployment of already present
   shell: |
-    kubectl delete deployment myapp
-    kubectl delete svc myapp-python-service
+    depCnt=$(kubectl get deployments | grep myapp | wc -l)
+    if [ $depCnt -gt 0 ]
+    then
+      kubectl delete deployment myapp
+    fi
+    svcCnt=$(kubectl get svc | grep myapp-python-service| wc -l)
+    if [ $svcCnt -gt 0 ]
+    then
+      kubectl delete svc myapp-python-service
+    fi
 
 - name: install the deployment again
   shell: |
