@@ -26,3 +26,7 @@
   until: result.msg.find('OK') != -1
   retries: 18
   delay: 10
+
+- name: K8s health check result
+  debug:
+    msg: "{{ result.status }} {{ result.msg }}"

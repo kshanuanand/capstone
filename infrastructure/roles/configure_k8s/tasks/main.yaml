@@ -1,7 +1,3 @@
-- name: K8s health check result
-  debug:
-    msg: "{{ result.status }} {{ result.msg }}"
-
 - name: Task to create .kube in ubuntu user
   file:
     path: /home/ubuntu/.kube
