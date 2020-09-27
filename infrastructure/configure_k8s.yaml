@@ -1,5 +1,7 @@
 ---
 - name: Configure k8s
   hosts: k8shost
+  become: yes
+  become_user: root
   roles:
     - configure_k8s

@@ -18,6 +18,7 @@
 
 - name: Copy kubeconfig in ubuntu user
   copy:
+    remote_src: yes
     src: /etc/kubernetes/admin.conf
     dest: /home/ubuntu/.kube/config
     owner: ubuntu
