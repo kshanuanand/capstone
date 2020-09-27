@@ -101,6 +101,8 @@ Resources:
           sudo apt-mark hold kubelet kubeadm kubectl
           cd /root/
           kubeadm init
+          echo "Sleeping fo 60 secs"
+          sleep 60
       InstanceType: !Ref EC2Instance
       BlockDeviceMappings:
       - DeviceName: "/dev/sdk"
