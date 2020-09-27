@@ -33,7 +33,7 @@ pipeline{
                 job: 'CreateDeploymentEnv',
                 parameters: [
                   string(name:'EnvType',value:'green'),
-                  booleanParam(name:'state'y,value:'present')
+                  booleanParam(name:'state',value:'present')
                   string(name:'aws_region',value:'us-west-2'),
                   string(name:'EnvName',value:'capstone'),
                   string(name:'vpc_EnvName',value:'capstone'),
@@ -70,7 +70,7 @@ pipeline{
     stage('Deploy on Green Environment'){
       steps{
         sh "echo 'Deploy application'"
-        
+
       }
       
     }
