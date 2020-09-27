@@ -89,6 +89,7 @@ Resources:
           stable"
           apt-get update
           apt-get install -y python
+          which python
           apt-get install -y docker-ce
           usermod -aG docker ubuntu
           curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
