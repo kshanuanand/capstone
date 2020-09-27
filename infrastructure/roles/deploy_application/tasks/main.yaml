@@ -10,6 +10,6 @@
 
 - name: install the deployment again
   k8s_raw:
-    state present
+    state: present
     src: /home/ubuntu/mydeployment.yaml
 
