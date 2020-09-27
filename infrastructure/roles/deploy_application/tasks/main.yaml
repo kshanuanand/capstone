@@ -1,0 +1,15 @@
+- name: Copy deployment file to target hosts
+  template:
+    src: mydeployment.yaml.j2
+    dest: /home/ubuntu/mydeployment.yaml
+
+- name: delete deployment of already present
+  k8s_raw:
+    state: absent
+    src: /home/ubuntu/mydeployment.yaml
+
+- name: install the deployment again
+  k8s_raw:
+    state present
+    src: /home/ubuntu/mydeployment.yaml
+

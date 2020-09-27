@@ -25,22 +25,61 @@ pipeline{
       }
     }
     stage('Create Infrastructure'){
-      steps{
-        sh "echo 'Create Infrastructure'"
+      parallel{
+        stage('Create Green Environment'){
+          steps{
+            script{
+              build(
+                job: 'CreateDeploymentEnv',
+                parameters: [
+                  string(name:'EnvType',value:'green'),
+                  booleanParam(name:'state'y,value:'present')
+                  string(name:'aws_region',value:'us-west-2'),
+                  string(name:'EnvName',value:'capstone'),
+                  string(name:'vpc_EnvName',value:'capstone'),
+                  string(name:"EC2AmiId",value:"ami-0a634ae95e11c6f91"),
+                  string(name:"EC2Key",value:"aws-cli-test"),
+                  string(name:"EC2Instance",value:"t2.large")
+                ]
+              )
+            }
+          }
+        }
+        stage('Create Blue Environment'){
+          steps{
+            script{
+              build(
+                job: 'CreateDeploymentEnv',
+                parameters: [
+                  string(name:'EnvType',value:'blue'),
+                  booleanParam(name:'state'y,value:'present')
+                  string(name:'aws_region',value:'us-west-2'),
+                  string(name:'EnvName',value:'capstone'),
+                  string(name:'vpc_EnvName',value:'capstone'),
+                  string(name:"EC2AmiId",value:"ami-0a634ae95e11c6f91"),
+                  string(name:"EC2Key",value:"aws-cli-test"),
+                  string(name:"EC2Instance",value:"t2.large")
+
+                ]
+              )
+            }
+          }
+        }
       }
     }
-    stage('Deploy application'){
+    stage('Deploy on Green Environment'){
       steps{
         sh "echo 'Deploy application'"
+        
       }
       
     }
-    stage('Test Application'){
+    stage('Test Application on Green Environment'){
       steps{
         sh "echo 'Test Application'"
       }
     }
-    stage('Rolling upgrade to Production'){
+    stage('Update on Blue Environment'){
       steps{
         sh "echo 'Rolling'"
       }
