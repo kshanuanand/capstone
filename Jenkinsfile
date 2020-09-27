@@ -98,7 +98,7 @@ pipeline{
       echo "Cleaning up docker images"
       sh '''
         container_list=$(docker ps -a| grep Exited| awk '{print \$1}'| tr '\n' ' ')
-        if [ ! -z $ container_list]
+        if [ ! -z $container_list ]
         then
           docker rm $container_list
         fi

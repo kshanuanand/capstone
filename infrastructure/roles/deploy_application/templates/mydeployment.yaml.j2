@@ -21,7 +21,7 @@ spec:
         ports:
         - containerPort: 5000
       imagePullSecrets:
-      - name: imageRegistry
+      - name: docker-secret
 
 ---
 apiVersion: v1
@@ -40,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: imageRegistry
+  name: docker-secret
 data:
   username: {{ registry_username }}
   password: {{ registry_password }}
