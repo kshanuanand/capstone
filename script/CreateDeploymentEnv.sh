@@ -21,4 +21,10 @@ cat infrastructure/group_vars/all/main
 
 cd infrastructure/
 ansible-playbook createEc2.yaml -i localhost, --connection=local
+
+if [[ "${state}" == 'present' ]]
+then
+    ansible-playbook configure_k8s.yaml -i group_vars/all/k8shosts.ini
+fi
+
 cd -

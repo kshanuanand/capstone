@@ -1,0 +1,5 @@
+---
+- name: Configure k8s
+  hosts: k8shost
+  roles:
+    - configure_k8s
