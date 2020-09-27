@@ -1,5 +1,9 @@
 pipeline{
   agent any
+  parameters{
+    string(name: 'registry_username', defaultValue: '', description: 'docker registry username')
+    string(name: "registry_password", defaultValue: '', description: 'docker registry password')
+  }
   stages{
     stage('Setup Workspace'){
       steps{

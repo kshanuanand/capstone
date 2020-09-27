@@ -28,6 +28,8 @@ EOF
 
 cat > infrastructure/group_vars/all/main <<EOF
 image_tag: ${BUILD_ID}
+registry_username: ${registry_username}
+registry_password: ${registry_password}
 EOF
 
 cd infrastructure
