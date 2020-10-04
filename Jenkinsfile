@@ -50,6 +50,7 @@ pipeline{
           }
         }
         stage('Create Blue Environment'){
+          when { branch 'dvelop'}
           steps{
             script{
               build(
