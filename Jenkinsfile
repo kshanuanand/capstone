@@ -28,8 +28,7 @@ pipeline{
         sh "docker push \"kshanuanand/capstone:${BUILD_NUMBER}\""
       }
     }
-    stage('Create Infrastructure'){
-      parallel{
+    stages('Create Infrastructure Green'){
         stage('Create Green Environment'){
           steps{
             script{
@@ -49,8 +48,19 @@ pipeline{
             }
           }
         }
-        stage('Create Blue Environment'){
-          when { branch 'dvelop'}
+        stage('Deploy on Green Environment'){
+          step{
+            withAWS(region:'us-west-2',credentials:'udacity-aws-cli-user') {
+            sh "echo 'Deploy application'"
+            sh '''
+              bash ./script/DeployAndTest.sh "capstone-green-K8s-stack"
+            '''
+            }
+          }
+        }
+    }
+    stages('Create Infrastructure Blue'){
+      stage('Create Blue Environment'){
           steps{
             script{
               build(
@@ -64,33 +74,23 @@ pipeline{
                   string(name:"EC2AmiId",value:"ami-0a634ae95e11c6f91"),
                   string(name:"EC2Key",value:"aws-cli-test"),
                   string(name:"EC2Instance",value:"t2.large")
-
                 ]
               )
             }
           }
         }
-      }
-    }
-    stage('Deploy on Green Environment'){
-      steps{
-        withAWS(region:'us-west-2',credentials:'udacity-aws-cli-user') {
-          sh "echo 'Deploy application'"
-          sh '''
-            bash ./script/DeployAndTest.sh "capstone-green-K8s-stack"
-          '''
+        stage('Update on Blue Environment'){
+          steps{
+            sh '''
+            if [ "$(cat /tmp/${JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)" == "SUCCESS" ]
+            then
+                echo "Green Deployment was success. Deploy on Blue Environment"
+                bash ./script/DeployAndTest.sh "capstone-blue-K8s-stack"
+            else
+                echo "Green Deployment was failure. Skipping Blue Environment Deployment"
+            fi
+        '''
         }
-      }
-      
-    }
-    stage('Test Application on Green Environment'){
-      steps{
-        sh "echo 'Test Application'"
-      }
-    }
-    stage('Update on Blue Environment'){
-      steps{
-        sh "echo 'Rolling'"
       }
     }
   }

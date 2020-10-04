@@ -32,5 +32,11 @@ registry_password: ${registry_password}
 EOF
 
 cd infrastructure
-ansible-playbook deploy_app.yaml -i group_vars/all/k8shosts.ini
+ansible-playbook deploy_app.yaml -i group_vars/all/k8shosts.
+if [ $? -eq 0 ]
+then
+    echo "DEPLOY_STATUS:SUCCESS" > /tmp/${JOB_NAME}_${BUILD_NUMBER}
+else
+    echo "DEPLOY_STATUS:FAILURE" > /tmp/${JOB_NAME}_${BUILD_NUMBER}
+fi
 cd -
