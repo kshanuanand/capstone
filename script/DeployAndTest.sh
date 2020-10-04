@@ -32,6 +32,7 @@ registry_username: ${registry_username}
 registry_password: ${registry_password}
 EOF
 N_JOB_NAME=$(echo ${JOB_NAME} | tr '/' '_' )
+echo "N_JOB_NAME: ${N_JOB_NAME}"
 cd infrastructure
 ansible-playbook deploy_app.yaml -i group_vars/all/k8shosts.ini
 if [ $? -eq 0 ]
