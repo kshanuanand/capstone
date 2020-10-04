@@ -85,6 +85,7 @@ pipeline{
         }
         stage('Update on Blue Environment'){
           steps{
+            withAWS(region:'us-west-2',credentials:'udacity-aws-cli-user') {
               sh '''
                 N_JOB_NAME=$(echo ${JOB_NAME} | tr '/' '_' )
                 GREEN_STATUS=$(cat /tmp/${N_JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)
@@ -96,6 +97,7 @@ pipeline{
                   echo "Green Deployment was failure. Skipping Blue Environment Deployment"
                 fi
               '''
+            }
           }
         }
       }
