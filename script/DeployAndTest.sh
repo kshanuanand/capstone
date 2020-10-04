@@ -14,6 +14,7 @@ pip install boto boto3
 
 python script/getK8sIP.py "${stack_name}"
 k8shost=$(python script/getK8sIP.py "${stack_name}")
+echo "k8shost: |${k8shost}|"
 
 #aws cloudformation describe-stacks --stack-name ${stack_name} | jq
 cat > infrastructure/group_vars/all/k8shosts.ini <<EOF
@@ -30,13 +31,13 @@ image_tag: ${BUILD_ID}
 registry_username: ${registry_username}
 registry_password: ${registry_password}
 EOF
-
+N_JOB_NAME=$(echo ${JOB_NAME} | tr '/' '_' )
 cd infrastructure
-ansible-playbook deploy_app.yaml -i group_vars/all/k8shosts.
+ansible-playbook deploy_app.yaml -i group_vars/all/k8shosts.ini
 if [ $? -eq 0 ]
 then
-    echo "DEPLOY_STATUS:SUCCESS" > /tmp/${JOB_NAME}_${BUILD_NUMBER}
+    echo "DEPLOY_STATUS:SUCCESS" > /tmp/${N_JOB_NAME}_${BUILD_NUMBER}
 else
-    echo "DEPLOY_STATUS:FAILURE" > /tmp/${JOB_NAME}_${BUILD_NUMBER}
+    echo "DEPLOY_STATUS:FAILURE" > /tmp/${N_JOB_NAME}_${BUILD_NUMBER}
 fi
 cd -

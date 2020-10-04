@@ -86,7 +86,8 @@ pipeline{
         stage('Update on Blue Environment'){
           steps{
               sh '''
-                if [ "$(cat /tmp/${JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)" == "SUCCESS" ]
+                N_JOB_NAME=$(echo ${JOB_NAME} | tr '/' '_' )
+                if [ "$(cat /tmp/${N_JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)" == "SUCCESS" ]
                 then
                   echo "Green Deployment was success. Deploy on Blue Environment"
                   bash ./script/DeployAndTest.sh "capstone-blue-K8s-stack"
