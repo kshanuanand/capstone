@@ -23,10 +23,9 @@
 - name: Wait for application to start
   action: uri url=http://localhost:30000/ validate_certs=False
   register: result
-  until: result.msg.find('My name is myapp') != -1
+  until: result.status == 200
   retries: 18
   delay: 10
-  ignore_errors: yes
 
 - name: Print message
   debug:
