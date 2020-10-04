@@ -87,7 +87,8 @@ pipeline{
           steps{
               sh '''
                 N_JOB_NAME=$(echo ${JOB_NAME} | tr '/' '_' )
-                if [ "$(cat /tmp/${N_JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)" == "SUCCESS" ]
+                GREEN_STATUS=$(cat /tmp/${N_JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)
+                if [ "${GREEN_STATUS}" == "SUCCESS" ]
                 then
                   echo "Green Deployment was success. Deploy on Blue Environment"
                   bash ./script/DeployAndTest.sh "capstone-blue-K8s-stack"
@@ -105,7 +106,7 @@ pipeline{
       echo "Cleaning up docker images"
       sh '''
         container_list=$(docker ps -a| grep Exited| awk '{print \$1}'| tr '\n' ' ')
-        if [ ! -z $container_list ]
+        if [ "X${container_list}" != "X" ]
         then
           docker rm $container_list
         fi
