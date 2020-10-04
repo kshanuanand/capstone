@@ -85,7 +85,6 @@ pipeline{
         }
         stage('Update on Blue Environment'){
           steps{
-            step{
               sh '''
                 if [ "$(cat /tmp/${JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)" == "SUCCESS" ]
                 then
@@ -95,7 +94,6 @@ pipeline{
                   echo "Green Deployment was failure. Skipping Blue Environment Deployment"
                 fi
               '''
-            }
           }
         }
       }
