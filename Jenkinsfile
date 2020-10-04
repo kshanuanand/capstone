@@ -88,7 +88,7 @@ pipeline{
               sh '''
                 N_JOB_NAME=$(echo ${JOB_NAME} | tr '/' '_' )
                 GREEN_STATUS=$(cat /tmp/${N_JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)
-                if [ "${GREEN_STATUS}" == "SUCCESS" ]
+                if [ "${GREEN_STATUS}" = 'SUCCESS' ]
                 then
                   echo "Green Deployment was success. Deploy on Blue Environment"
                   bash ./script/DeployAndTest.sh "capstone-blue-K8s-stack"
