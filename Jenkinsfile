@@ -120,5 +120,22 @@ pipeline{
         fi
       '''
     }
+    success{
+      script{
+        build(
+          job: 'CreateDeploymentEnv',
+          parameters: [
+            string(name:'EnvType',value:'green'),
+            string(name:'state',value:'absent'),
+            string(name:'aws_region',value:'us-west-2'),
+            string(name:'EnvName',value:'capstone'),
+            string(name:'vpc_EnvName',value:'capstone'),
+            string(name:"EC2AmiId",value:"ami-0a634ae95e11c6f91"),
+            string(name:"EC2Key",value:"aws-cli-test"),
+            string(name:"EC2Instance",value:"t2.large")
+          ]
+        )
+      }
+    }
   }
 }
