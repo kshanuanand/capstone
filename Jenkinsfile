@@ -50,13 +50,15 @@ pipeline{
           }
         }
         stage('Deploy on Green Environment'){
-          step{
+          steps{
+            step{
             withAWS(region:'us-west-2',credentials:'udacity-aws-cli-user') {
             sh "echo 'Deploy application'"
             sh '''
               bash ./script/DeployAndTest.sh "capstone-green-K8s-stack"
             '''
             }
+          }
           }
         }
       }
@@ -84,15 +86,17 @@ pipeline{
         }
         stage('Update on Blue Environment'){
           steps{
-            sh '''
-            if [ "$(cat /tmp/${JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)" == "SUCCESS" ]
-            then
-                echo "Green Deployment was success. Deploy on Blue Environment"
-                bash ./script/DeployAndTest.sh "capstone-blue-K8s-stack"
-            else
-                echo "Green Deployment was failure. Skipping Blue Environment Deployment"
-            fi
-          '''
+            step{
+              sh '''
+                if [ "$(cat /tmp/${JOB_NAME}_${BUILD_NUMBER} | cut -d ':' -f2)" == "SUCCESS" ]
+                then
+                  echo "Green Deployment was success. Deploy on Blue Environment"
+                  bash ./script/DeployAndTest.sh "capstone-blue-K8s-stack"
+                else
+                  echo "Green Deployment was failure. Skipping Blue Environment Deployment"
+                fi
+              '''
+            }
           }
         }
       }
