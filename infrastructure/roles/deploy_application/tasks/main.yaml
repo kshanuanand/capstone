@@ -26,3 +26,8 @@
   until: result.msg.find('My name is myapp') != -1
   retries: 18
   delay: 10
+  ignore_errors: yes
+
+- name: Print message
+  debug:
+     msg: "{{ result }}"
