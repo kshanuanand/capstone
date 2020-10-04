@@ -28,8 +28,8 @@ EOF
 
 cat > infrastructure/group_vars/all/main <<EOF
 image_tag: ${BUILD_ID}
-registry_username: ${registry_username}
-registry_password: ${registry_password}
+registry_username: ${DOCKER_HUB_CREDS_USR}
+registry_password: ${DOCKER_HUB_CREDS_PSW}
 EOF
 N_JOB_NAME=$(echo ${JOB_NAME} | tr '/' '_' )
 echo "N_JOB_NAME: ${N_JOB_NAME}"

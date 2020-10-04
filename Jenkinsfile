@@ -1,8 +1,7 @@
 pipeline{
   agent any
-  parameters{
-    string(name: 'registry_username', defaultValue: '', description: 'docker registry username')
-    string(name: "registry_password", defaultValue: '', description: 'docker registry password')
+  environment{
+    DOCKER_HUB_CREDS = credentials('docker_hub_login')
   }
   stages{
     stage('Setup Workspace'){
