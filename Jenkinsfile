@@ -106,7 +106,7 @@ pipeline{
       '''
       sh '''
         image_list=$(docker image ls| awk '{print \$3}'|grep -v IMAGE | tr '\n' ' ')
-        if [ ! -z $image_list ]
+        if [ "X${image_list}" != "X" ]
         then
           docker rmi $image_list
         fi
