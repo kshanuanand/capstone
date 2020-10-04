@@ -21,7 +21,7 @@
     kubectl apply -f /home/ubuntu/mydeployment.yaml
 
 - name: Wait for application to start
-  action: uri url=https://{{ k8shost }}:30000/ validate_certs=False
+  action: uri url=https://localhost:30000/ validate_certs=False
   register: result
   until: result.msg.find('My name is myapp') != -1
   retries: 18
