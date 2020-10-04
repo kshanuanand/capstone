@@ -51,14 +51,13 @@ pipeline{
         }
         stage('Deploy on Green Environment'){
           steps{
-            step{
-            withAWS(region:'us-west-2',credentials:'udacity-aws-cli-user') {
-            sh "echo 'Deploy application'"
-            sh '''
-              bash ./script/DeployAndTest.sh "capstone-green-K8s-stack"
-            '''
-            }
-          }
+              withAWS(region:'us-west-2',credentials:'udacity-aws-cli-user') {
+                sh "echo 'Deploy application'"
+                sh '''
+                  bash ./script/DeployAndTest.sh "capstone-green-K8s-stack"
+                '''
+              }
+            
           }
         }
       }
