@@ -28,7 +28,8 @@ pipeline{
         sh "docker push \"kshanuanand/capstone:${BUILD_NUMBER}\""
       }
     }
-    stages('Create Infrastructure Green'){
+    stage('Create Infrastructure Green'){
+      stages{
         stage('Create Green Environment'){
           steps{
             script{
@@ -58,9 +59,11 @@ pipeline{
             }
           }
         }
+      }
     }
-    stages('Create Infrastructure Blue'){
-      stage('Create Blue Environment'){
+    stage('Create Infrastructure Blue'){
+      stages{
+        stage('Create Blue Environment'){
           steps{
             script{
               build(
@@ -89,7 +92,8 @@ pipeline{
             else
                 echo "Green Deployment was failure. Skipping Blue Environment Deployment"
             fi
-        '''
+          '''
+          }
         }
       }
     }
